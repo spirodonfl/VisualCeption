@@ -21,3 +21,12 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Build codecept
+        run: php vendor/bin/codecept build -c test/integration/
+
+      - name: Run integration tests
+        run: php vendor/bin/codecept run -c test/integration/
+
+      - name: Run unit test
+        run: vendor/bin/phpunit test/unit/

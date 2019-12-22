@@ -5,6 +5,11 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      phantomjs:
+        image: wernight/phantomjs
+        ports:
+          - 4444
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -21,9 +26,6 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
-
-      - name: Start PhantomJS
-        run: phantomjs --webdriver=4444 --ignore-ssl-errors=true &
 
       - name: Build codecept
         run: php vendor/bin/codecept build -c test/integration/

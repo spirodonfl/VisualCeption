@@ -316,7 +316,7 @@ class VisualCeption extends CodeceptionModule
 
         $imageCoords = $this->webDriver->executeScript('
               var rect = document.querySelector( "' . $elementId . '" ).getBoundingClientRect();
-              return {"offset_x": rect.left, "offset_y": rect.top, "width": rect.width, "height": rect.height};
+              return {"offset_x": rect.left, "offset_y": rect.top, "width": Math.floor(rect.width) * window.devicePixelRatio, "height": Math.floor(rect.height) * window.devicePixelRatio};
         ');
 
         return $imageCoords;
